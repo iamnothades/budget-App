@@ -10,3 +10,9 @@ var budgetController = (function () {
         },
     }
 })()
+
+var UIController = (function () {
+    //TODO: some code
+})()
+
+var controller = (function () {})()
