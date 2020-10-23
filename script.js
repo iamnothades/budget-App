@@ -1,8 +1,3 @@
-'use strict';
+'use strict'
 
-
-
-
-
-
-const x = 23;
+const x = 23
