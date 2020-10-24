@@ -1,18 +1,25 @@
 var budgetController = (function () {
-    var x = '23'
+    var x = 23;
 
     var add = function (a) {
-        return x + a
-    }
+        return x + a;
+    };
     return {
         publicTest: function (b) {
-            console.log(add(b))
+            return add(b);
         },
-    }
-})()
+    };
+})();
 
 var UIController = (function () {
-    //TODO: some code
-})()
+    //TODO: write some good codes
+})();
 
-var controller = (function () {})()
+var controller = (function (budgetCtrl, UICntrl) {
+    var z = budgetCtrl.publicTest(5);
+    return {
+        anotherpublic: function () {
+            console.log(z);
+        },
+    };
+})(budgetController, UIController);
