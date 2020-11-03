@@ -58,7 +58,7 @@ var UIController = (function () {
         inputDescription: '.add__description',
         inputValue: '.add__value',
         inputBtn: '.add__btn',
-imp        incomeContainer: '.income__list',
+        incomeContainer: '.income__list',
         expensesContainer: '.expenses__list',
     };
     return {
@@ -73,6 +73,21 @@ imp        incomeContainer: '.income__list',
         },
         getDOMStrings: function () {
             return DOMStrings;
+        },
+
+        clearfields: function () {
+            var fields, fieldsArr;
+            fields = document.querySelectorAll(
+                DOMStrings.inputDescription + ',' + DOMStrings.inputValue
+            );
+
+            fieldsArr = Array.prototype.slice.call(fields);
+
+            fieldsArr.forEach(function (current, value, array) {
+                current.value = '';
+            });
+
+            fieldsArr[0].focus();
         },
 
         addListItem: function (obj, type) {
@@ -95,7 +110,8 @@ imp        incomeContainer: '.income__list',
             newHtml = html.replace('%id%', obj.id);
             newHtml = newHtml.replace('%description%', obj.description);
             newHtml = newHtml.replace('%value%', obj.value);
-            //3)Insert HTML into Doc
+
+            //3)Insert HTML into DOM
             document
                 .querySelector(element)
                 .insertAdjacentHTML('beforeend', newHtml);
@@ -131,8 +147,10 @@ var controller = (function (budgetCtrl, UICntrl) {
         );
         //3.Add new item to UI
         UICntrl.addListItem(newItem, input.type);
-        //4. Calc budget
-        //5.Disp budget
+        //4.Clear fields
+        UICntrl.clearfields();
+        //5. Calc budget
+        //6.Disp budget
     };
     return {
         init: function () {

@@ -38,11 +38,11 @@ body {
 **********************************************/
 
 .top {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-        url(https://c0.wallpaperflare.com/preview/190/888/45/business-laptop-office-computer.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(https://d1dh93s7n44ml6.cloudfront.net/blog/wp-content/uploads/2017/08/07042647/Payroll.jpg);
     background-size: cover;
     background-position: center center;
-    min-height: 35vh;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
