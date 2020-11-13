@@ -12,6 +12,14 @@ var budgetController = (function () {
         this.value = value;
     };
 
+    var calculateTotal = function (type) {
+        var sum = 0;
+        data.allItems[type].forEach(function (cur) {
+            sum += cur.value;
+        });
+        data.totals[type] = sum;
+    };
+
     var data = {
         allItems: {
             inc: [],
@@ -21,6 +29,8 @@ var budgetController = (function () {
             inc: 0,
             exp: 0,
         },
+        budget: 0,
+        percentage: -1,
     };
     return {
         addItem: function (type, des, val) {
@@ -43,6 +53,33 @@ var budgetController = (function () {
             //NOTE: Return new element
             return newItem;
         },
+
+        calculateBudget: function () {
+            //TODO:
+            //1.Calculate total income and expenses
+            calculateTotal('inc');
+            calculateTotal('exp');
+            //2.Calculate the budget:income - expenses
+            data.budget = data.totals.inc - data.totals.exp;
+            //3.Calculate the percentage of income that we spent
+            if (data.totals.inc > 0) {
+                data.percentage = Math.round(
+                    (data.totals.exp / data.totals.inc) * 100
+                );
+            } else {
+                data.percentage = -1;
+            }
+        },
+
+        getBudget: function () {
+            return {
+                budget: data.budget,
+                totalInc: data.totals.inc,
+                totalExp: data.totals.exp,
+                percentage: data.percentage,
+            };
+        },
+
         testing: function () {
             console.log(data);
         },
@@ -137,9 +174,13 @@ var controller = (function (budgetCtrl, UICntrl) {
     };
 
     var updateBudget = function () {
+        //TODO:
         //1.Calc budget
+        budgetCtrl.calculateBudget();
         //2.Return the budget
+        var budget = budgetCtrl.getBudget();
         //3.Disp budget
+        console.log(budget);
     };
     var ctrlAddItem = function () {
         var input, newItem;
